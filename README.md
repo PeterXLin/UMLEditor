@@ -13,7 +13,8 @@
 
 ### Button Area
 
-- mode: select, association line, generalization line, composition line, class, use case
+- mode(預設 mode 為 select): select, association line, generalization line, composition line, class, use case
+
 - [ ] 使用 enum 宣告各種模式
 
 - select mode
@@ -45,15 +46,17 @@
   - canvas area onclick: 以 click 位置的(x, y)座標為左上角，產生一個 class object
 - use case mode
   - onclick: 將其他按鈕取消選取，button 變黑
+  - [ ] 要如何只讓一個 button on click
   - canvas area onclick: 以 click 位置的(x, y)座標為左上角，產生一個 class object
 
 ---
 
 ### Canvas Area[object]
 
-==Variable==
+⭐**Variable**
 **object list** : contain all object on canvas, sort by depth
-==Function==
+
+⭐**Function**
 **draw** : draw all objects in canvas - [ ]確認位置移動的流程
 
 #### 各個物件的功能
@@ -86,6 +89,6 @@
 
 ### 注意事項
 
-==button 位置先固定，之後再改成相對位置(視窗大小改變時，button 位置也會改變)==
+**button 位置先固定，之後再改成相對位置(視窗大小改變時，button 位置也會改變)**
 
-==物件深度不確定甚麼時候會更新，先不用管==
+**物件深度不確定甚麼時候會更新，先不用管**

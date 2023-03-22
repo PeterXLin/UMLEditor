@@ -20,6 +20,13 @@ import javax.swing.JSeparator;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import java.awt.CardLayout;
+import javax.swing.JButton;
+import java.awt.Color;
+import javax.swing.JRadioButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainWindow extends JFrame {
 
@@ -67,6 +74,7 @@ public class MainWindow extends JFrame {
 		JMenuItem UngroupButton = new JMenuItem("Ungroup");
 		UngroupButton.setHorizontalAlignment(SwingConstants.LEFT);
 		mnNewMenu_1.add(UngroupButton);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
@@ -87,9 +95,38 @@ public class MainWindow extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 241, 577);
 		contentPane.add(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBackground(Color.BLACK);
+		btnNewButton.setForeground(Color.GREEN);
+		panel.add(btnNewButton);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("");
+		rdbtnNewRadioButton.setIcon(new ImageIcon("D:\\Codes\\java_learn\\ObjectOriented\\midterm_project\\src\\images\\Use_Case_icon.png"));
+		panel.add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("");
+		rdbtnNewRadioButton_1.setIcon(new ImageIcon("D:\\Codes\\java_learn\\ObjectOriented\\midterm_project\\src\\images\\select.png"));
+		panel.add(rdbtnNewRadioButton_1);
+		
+		JRadioButton rdbtnNewRadioButton_1_1 = new JRadioButton("");
+		rdbtnNewRadioButton_1_1.setIcon(new ImageIcon("D:\\Codes\\java_learn\\ObjectOriented\\midterm_project\\src\\images\\Generalization_Line.png"));
+		panel.add(rdbtnNewRadioButton_1_1);
+		
+		JRadioButton rdbtnNewRadioButton_1_2 = new JRadioButton("");
+		rdbtnNewRadioButton_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		JToggleButton tglbtnNewToggleButton = new JToggleButton("New toggle button");
+		panel.add(tglbtnNewToggleButton);
+		rdbtnNewRadioButton_1_2.setIcon(new ImageIcon("D:\\Codes\\java_learn\\ObjectOriented\\midterm_project\\src\\images\\Composition_Line.png"));
+		panel.add(rdbtnNewRadioButton_1_2);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(239, 0, 603, 577);
+		panel_1.setBounds(374, 0, 468, 577);
 		contentPane.add(panel_1);
 	}
 }

@@ -21,7 +21,10 @@ import java.awt.Font;
 import javax.swing.border.LineBorder;
 import javax.swing.SpringLayout;
 import javax.swing.JLayeredPane;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.ButtonGroup;
 
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
@@ -29,12 +32,24 @@ import java.awt.GridLayout;
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JToolBar;
+import javax.swing.UIManager;
+import java.awt.Rectangle;
+import java.awt.Insets;
+
+import midterm_project.components.ToggleButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JButton;
 
 public class GUI extends JFrame {
-
 	// private JPanel contentPane;
 	private JSplitPane contentPane;
+	
+	private Mode[] allModes = {Mode.SelectMode, Mode.AssociationlineMode, Mode.GeneralizationLineMode, Mode.CompositionLineMode
+			, Mode.ClassMode, Mode.UseCaseMode};
 
+	static Mode currentMode = Mode.SelectMode;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -44,7 +59,6 @@ public class GUI extends JFrame {
 				try {
 					GUI frame = new GUI();
 					frame.setVisible(true);
-					// frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,53 +74,49 @@ public class GUI extends JFrame {
 		setBounds(100, 100, 1000, 700);
 		
 		JPanel buttonArea = new JPanel();
-		buttonArea.setMinimumSize(new Dimension(200, 10));
+		buttonArea.setMinimumSize(new Dimension(100, 10));
 		JLayeredPane canvasArea = new JLayeredPane();
 		contentPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, buttonArea, canvasArea);
 		contentPane.setEnabled(false);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
 		
+		// menu area
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setEnabled(false);
-		lblNewLabel.setIcon(new ImageIcon("D:\\Codes\\java_learn\\ObjectOriented\\midterm_project\\src\\image\\class_object.png"));
-		lblNewLabel.setBounds(165, 254, 100, 110);
-		canvasArea.add(lblNewLabel);
+		JMenu mnNewMenu = new JMenu("File");
+		mnNewMenu.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
+		menuBar.add(mnNewMenu);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setIcon(new ImageIcon("D:\\Codes\\java_learn\\ObjectOriented\\midterm_project\\src\\image\\class_object.png"));
-		lblNewLabel_2.setEnabled(false);
-		lblNewLabel_2.setBounds(225, 283, 100, 110);
-		canvasArea.add(lblNewLabel_2);
-		buttonArea.setLayout(new BoxLayout(buttonArea, BoxLayout.Y_AXIS));
+		JMenu mnNewMenu_1 = new JMenu("Edit");
+		mnNewMenu_1.setHorizontalAlignment(SwingConstants.LEFT);
+		mnNewMenu_1.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
+		menuBar.add(mnNewMenu_1);
 		
-		JToggleButton tglbtnNewToggleButton = new JToggleButton("New toggle button");
-		tglbtnNewToggleButton.setMaximumSize(new Dimension(32767, 23));
-		tglbtnNewToggleButton.setPreferredSize(new Dimension(200, 23));
-		tglbtnNewToggleButton.setMinimumSize(new Dimension(200, 23));
-		buttonArea.add(tglbtnNewToggleButton);
+		JMenuItem GroupButton = new JMenuItem("Group");
+		GroupButton.setHorizontalAlignment(SwingConstants.LEFT);
+		mnNewMenu_1.add(GroupButton);
 		
-		JToggleButton tglbtnNewToggleButton_1 = new JToggleButton("New toggle button");
-		tglbtnNewToggleButton_1.setMinimumSize(new Dimension(200, 23));
-		tglbtnNewToggleButton_1.setMaximumSize(new Dimension(32767, 23));
-		tglbtnNewToggleButton_1.setPreferredSize(new Dimension(200, 23));
-		buttonArea.add(tglbtnNewToggleButton_1);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		JMenuItem UngroupButton = new JMenuItem("Ungroup");
+		UngroupButton.setHorizontalAlignment(SwingConstants.LEFT);
+		mnNewMenu_1.add(UngroupButton);
 		
-		setContentPane(contentPane);
+		JMenuItem mntmChangeObjectName = new JMenuItem("Change Object Name");
+		mntmChangeObjectName.setHorizontalAlignment(SwingConstants.LEFT);
+		mnNewMenu_1.add(mntmChangeObjectName);
+		
+		buttonArea.setLayout(new BoxLayout(buttonArea, BoxLayout.Y_AXIS));	
 		
 		
-		
-		// contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		// Button Area 
-		
-		
-		
-		// JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, , );
-		// splitPane.setOneTouchExpandable(true);
-		// contentPane.add(splitPane);
-//		box.add(label3);
+		// button area
+		ButtonGroup btnGroup = new ButtonGroup();
+		ToggleButton[] buttons = new ToggleButton[6];
+		for (int i = 0; i < allModes.length; i++) {
+			buttons[i] = new ToggleButton(allModes[i]);
+			System.out.println(allModes[i].getImgPath());
+			btnGroup.add(buttons[i].getBtn());
+			buttonArea.add(buttons[i].getBtn());
+		};
 	}
 }
