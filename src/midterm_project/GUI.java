@@ -36,7 +36,7 @@ import javax.swing.UIManager;
 import java.awt.Rectangle;
 import java.awt.Insets;
 
-import midterm_project.components.ToggleButton;
+import midterm_project.components.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -47,9 +47,6 @@ public class GUI extends JFrame {
 	
 	private Mode[] allModes = {Mode.SelectMode, Mode.AssociationlineMode, Mode.GeneralizationLineMode, Mode.CompositionLineMode
 			, Mode.ClassMode, Mode.UseCaseMode};
-
-	static Mode currentMode = Mode.SelectMode;
-	
 	/**
 	 * Launch the application.
 	 */
@@ -75,8 +72,10 @@ public class GUI extends JFrame {
 		
 		JPanel buttonArea = new JPanel();
 		buttonArea.setMinimumSize(new Dimension(100, 10));
-		JLayeredPane canvasArea = new JLayeredPane();
-		contentPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, buttonArea, canvasArea);
+		// JLayeredPane canvasArea = new JLayeredPane();
+		MyCanvasArea canvasArea = new MyCanvasArea();
+		
+		contentPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, buttonArea, canvasArea.getMyCanvas());
 		contentPane.setEnabled(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -114,7 +113,6 @@ public class GUI extends JFrame {
 		ToggleButton[] buttons = new ToggleButton[6];
 		for (int i = 0; i < allModes.length; i++) {
 			buttons[i] = new ToggleButton(allModes[i]);
-			System.out.println(allModes[i].getImgPath());
 			btnGroup.add(buttons[i].getBtn());
 			buttonArea.add(buttons[i].getBtn());
 		};

@@ -3,18 +3,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
 import javax.swing.plaf.metal.MetalToggleButtonUI;
 import midterm_project.Mode;
 
-public class ToggleButton{
+public class ToggleButton extends GUIComponent{
 	private JToggleButton btn;
 	// private boolean isClicked = false;
-	static Mode currentMode = Mode.SelectMode;
 	private Mode myMode;
 	
 	public ToggleButton() {
