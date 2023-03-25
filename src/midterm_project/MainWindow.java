@@ -15,6 +15,7 @@ import javax.swing.JToggleButton;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
+import java.awt.Component;
 import java.awt.BorderLayout;
 import javax.swing.JSeparator;
 import java.awt.GridLayout;
@@ -127,35 +128,35 @@ public class MainWindow extends JFrame {
 		panel.add(rdbtnNewRadioButton_1_2);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Component temp = panel_1.getComponentAt(e.getPoint());
+				if (temp != panel_1) {
+					System.out.println(temp.getClass());
+				}
+				
+			}
+		});
 		panel_1.setBounds(250, 0, 592, 577);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-			}
-		});
-		lblNewLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				panel_1.setComponentZOrder(lblNewLabel, 0);
-				System.out.println("label 1 clicked");
-				panel_1.repaint();
-			}
-		});
+		JLabel lblNewLabel = new JLabel("hello");
+		lblNewLabel.setFont(new Font("微軟正黑體", Font.BOLD, 16));
+		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon("D:\\Codes\\java_learn\\ObjectOriented\\midterm_project\\src\\images\\class_object.png"));
 		lblNewLabel.setForeground(new Color(255, 0, 0));
 		lblNewLabel.setBackground(new Color(255, 0, 0));
-		lblNewLabel.setBounds(152, 192, 100, 110);
+		lblNewLabel.setBounds(63, 94, 100, 110);
 		panel_1.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("D:\\Codes\\java_learn\\ObjectOriented\\midterm_project\\src\\images\\class_object.png"));
 		lblNewLabel_1.setForeground(new Color(255, 128, 0));
 		lblNewLabel_1.setBackground(new Color(255, 128, 0));
-		lblNewLabel_1.setBounds(206, 236, 100, 110);
+		lblNewLabel_1.setBounds(221, 146, 100, 110);
 		lblNewLabel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -165,5 +166,20 @@ public class MainWindow extends JFrame {
 			}
 		});
 		panel_1.add(lblNewLabel_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(73, 202, 312, 256);
+		panel_1.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JLabel lblNewLabel_2 = new JLabel("hello");
+		lblNewLabel_2.setIcon(new ImageIcon("D:\\Codes\\java_learn\\ObjectOriented\\midterm_project\\src\\images\\class_object.png"));
+		lblNewLabel_2.setBounds(90, 77, 113, 120);
+		panel_2.add(lblNewLabel_2);
+		lblNewLabel_2.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setForeground(Color.RED);
+		lblNewLabel_2.setFont(new Font("微軟正黑體", Font.BOLD, 16));
+		lblNewLabel_2.setBackground(Color.RED);
 	}
 }

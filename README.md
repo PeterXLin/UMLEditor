@@ -2,6 +2,12 @@
 
 > this project implements a UML editor using java swing
 
+## TODO List
+
+- [x] 確認 composite object 的行為模式
+- [ ] check instanceof (connectable)
+- [ ] interface: connectable, selectable
+
 ## GUI
 
 ### Tool Bar Area
@@ -73,9 +79,9 @@ lblNewLabel_1.addMouseListener(new MouseAdapter() {
 ```
 
 - class mode
-  - canvas area onclick: 以 click 位置的(x, y)座標為左上角，產生一個 class object
+  - [x] canvas area onclick: 以 click 位置的(x, y)座標為左上角，產生一個 class object
 - use case mode
-  - canvas area onclick: 以 click 位置的(x, y)座標為左上角，產生一個 class object
+  - [x] canvas area onclick: 以 click 位置的(x, y)座標為左上角，產生一個 class object
 
 #### 各個物件的功能
 
@@ -98,7 +104,7 @@ lblNewLabel_1.addMouseListener(new MouseAdapter() {
 
   - [x] 思考需不需要有這個 object，或是直接記 connection 關係就好 -> 直接記 connection 關係就好，畫線用 Graphics2D 畫
 
-- composite object
+- composite object (can be selected, moved, ungrouped)
   善用 components.getParent()來取得 parent，and find some
   - [ ] 設計 composite object 移動時要如何一起動，可能用 box 之類的來包起來
 
@@ -110,8 +116,8 @@ lblNewLabel_1.addMouseListener(new MouseAdapter() {
 
 ### 注意事項
 
-**button 位置先固定，之後再改成相對位置(視窗大小改變時，button 位置也會改變)**
-
 **物件深度不確定甚麼時候會更新，先不用管**
+
+**有必要將 basic object, complex object 分出來建立一個 class 嗎?**
 
 JPanel.getComponentAt()

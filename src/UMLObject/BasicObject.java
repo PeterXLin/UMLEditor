@@ -1,15 +1,24 @@
 package UMLObject;
 
+import java.awt.Font;
+
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
 public class BasicObject extends UMLObject{
-	private boolean isSelected;
+	static final boolean connectable = true;
+	protected JLabel label;
 	
-	BasicObject(){};
+	BasicObject(){
+		label = new JLabel("default");
+		label.setFont(new Font("微軟正黑體", Font.BOLD, 16));
+		label.setHorizontalTextPosition(SwingConstants.CENTER);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+	};
 	
-	public boolean getSelected() {
-		return isSelected;
+	public JLabel getObject() {
+		return this.label;
 	}
 	
-	public void setSelected(boolean temp) {
-		this.isSelected = temp;
-	}
+
 }

@@ -11,13 +11,16 @@ import java.util.List;
 import java.util.ArrayList;
 
 import mode.*;
+import UMLObject.*;
 
 
 public class MyCanvasArea extends GUIComponent{	
 	private MyCanvas canvas;
+	private List<UMLObject> allUMLObject;
 	
 	public MyCanvasArea() {
 		canvas = new MyCanvas();
+		allUMLObject = new ArrayList<>();
 
 		CanvasMode[] allCanvasModes = {new CanvasSelectMode(), new CanvasAssociationLineMode(), new CanvasGeneralizationLineMode(),
 				new CanvasCompositionLineMode(), new CanvasClassMode(), new CanvasUseCaseMode()};
@@ -25,22 +28,22 @@ public class MyCanvasArea extends GUIComponent{
 		MouseAdapter ma = new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				allCanvasModes[currentMode.ordinal()].mouseClicked(e);
+				allCanvasModes[currentMode.ordinal()].mouseClicked(canvas, e);
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				allCanvasModes[currentMode.ordinal()].mousePressed(e);
+				allCanvasModes[currentMode.ordinal()].mousePressed(canvas, e);
 			}
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				allCanvasModes[currentMode.ordinal()].mouseReleased(e);
+				allCanvasModes[currentMode.ordinal()].mouseReleased(canvas, e);
 			}
 			
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				allCanvasModes[currentMode.ordinal()].mouseDragged(e);
+				allCanvasModes[currentMode.ordinal()].mouseDragged(canvas, e);
 			}
 		};
 		
@@ -55,20 +58,4 @@ public class MyCanvasArea extends GUIComponent{
 
 
 
-class MyCanvas extends JPanel {
-	/**
-	 * I don't know why I need this, but compiler suggested
-	 */
-	private static final long serialVersionUID = 6701031330107974482L;
-	
-	private List<Component[]> associationLine; 
-	private List<Component[]> compositionLine;
-	private List<Component[]> generalizationLine;
-	
-	public MyCanvas() {
-		associationLine = new ArrayList<>();
-		compositionLine = new ArrayList<>();
-		generalizationLine = new ArrayList<>();
-	}
-	
-}
+

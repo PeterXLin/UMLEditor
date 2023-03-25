@@ -1,32 +1,44 @@
 package mode;
 
 import java.awt.event.MouseEvent;
+import java.awt.Component;
+import java.awt.Point;
+import java.util.List;
+
+import UMLObject.UMLObject;
+import midterm_project.components.MyCanvas;
 
 public class CanvasSelectMode implements CanvasMode{
-	public CanvasSelectMode() {
-		
-	}
+	Point startPoint;
 	
+	public CanvasSelectMode() {
+	}
+
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(MyCanvas canvas,  MouseEvent e) {
+		Component temp = canvas.getComponentAt(e.getPoint());
+		canvas.deSelectAllObject();
+		if (temp == null || temp == canvas) {
+			startPoint = e.getPoint();
+		} else {
+			
+		}
+	}
+
+	@Override
+	public void mousePressed(MyCanvas canvas, MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mouseReleased(MyCanvas canvas, MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
+	public void mouseDragged(MyCanvas canvas, MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
