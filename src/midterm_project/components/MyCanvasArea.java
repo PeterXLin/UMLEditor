@@ -16,34 +16,39 @@ import UMLObject.*;
 
 public class MyCanvasArea extends GUIComponent{	
 	private MyCanvas canvas;
-	private List<UMLObject> allUMLObject;
 	
 	public MyCanvasArea() {
 		canvas = new MyCanvas();
-		allUMLObject = new ArrayList<>();
-
-		CanvasMode[] allCanvasModes = {new CanvasSelectMode(), new CanvasAssociationLineMode(), new CanvasGeneralizationLineMode(),
-				new CanvasCompositionLineMode(), new CanvasClassMode(), new CanvasUseCaseMode()};
 		
+		CanvasMode[] allCanvasModes = {new CanvasSelectMode(), new CanvasConnectionLineMode(ConnectionType.Association), 
+				new CanvasConnectionLineMode(ConnectionType.Generalization), new CanvasConnectionLineMode(ConnectionType.Composition),
+				new CanvasClassMode(), new CanvasUseCaseMode()};
+		
+		// System.out.println("default layout: " + canvas.getLayout().toString());
 		MouseAdapter ma = new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				allCanvasModes[currentMode.ordinal()].mouseClicked(canvas, e);
+				// canvas.revalidate();
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				allCanvasModes[currentMode.ordinal()].mousePressed(canvas, e);
+				// canvas.repaint();
 			}
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				allCanvasModes[currentMode.ordinal()].mouseReleased(canvas, e);
+				// canvas.repaint();
+
 			}
 			
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				allCanvasModes[currentMode.ordinal()].mouseDragged(canvas, e);
+				// canvas.repaint();
 			}
 		};
 		

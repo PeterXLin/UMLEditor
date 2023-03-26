@@ -1,6 +1,8 @@
 package UMLObject;
+import java.awt.Component;
+import java.awt.Rectangle;
 
-public class UMLObject {
+public abstract class UMLObject {
 	protected boolean isSelected;
 	
 	public boolean getSelected() {
@@ -10,4 +12,10 @@ public class UMLObject {
 	public void setSelected(boolean temp) {
 		this.isSelected = temp;
 	}
+	
+	public abstract Component getObject();
+	
+	public abstract Rectangle getBounds();
+	
+	public abstract boolean getConnectable();
 }

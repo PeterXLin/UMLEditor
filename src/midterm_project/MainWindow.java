@@ -97,7 +97,7 @@ public class MainWindow extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 241, 577);
 		contentPane.add(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setBackground(Color.BLACK);
@@ -143,20 +143,20 @@ public class MainWindow extends JFrame {
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("hello");
+		lblNewLabel.setBounds(63, 94, 100, 110);
 		lblNewLabel.setFont(new Font("微軟正黑體", Font.BOLD, 16));
 		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon("D:\\Codes\\java_learn\\ObjectOriented\\midterm_project\\src\\images\\class_object.png"));
 		lblNewLabel.setForeground(new Color(255, 0, 0));
 		lblNewLabel.setBackground(new Color(255, 0, 0));
-		lblNewLabel.setBounds(63, 94, 100, 110);
 		panel_1.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setBounds(221, 146, 100, 110);
 		lblNewLabel_1.setIcon(new ImageIcon("D:\\Codes\\java_learn\\ObjectOriented\\midterm_project\\src\\images\\class_object.png"));
 		lblNewLabel_1.setForeground(new Color(255, 128, 0));
 		lblNewLabel_1.setBackground(new Color(255, 128, 0));
-		lblNewLabel_1.setBounds(221, 146, 100, 110);
 		lblNewLabel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -168,7 +168,7 @@ public class MainWindow extends JFrame {
 		panel_1.add(lblNewLabel_1);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(73, 202, 312, 256);
+		panel_2.setBounds(134, 311, 312, 256);
 		panel_1.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -181,5 +181,9 @@ public class MainWindow extends JFrame {
 		lblNewLabel_2.setForeground(Color.RED);
 		lblNewLabel_2.setFont(new Font("微軟正黑體", Font.BOLD, 16));
 		lblNewLabel_2.setBackground(Color.RED);
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setBounds(375, 64, 107, 110);
+		panel_1.add(lblNewLabel_3);
 	}
 }

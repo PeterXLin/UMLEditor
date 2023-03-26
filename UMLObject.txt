@@ -1,0 +1,28 @@
+UMLObject 
+
+Basic Object 
+is Class Object is not a JLabel?
+===========================
+++inheritance++ cat is a animal
+1. class ClassObject extends JLabel implements UMLObject{
+
+}
+
+++Composition++
+2. class ClassObject extends BasicObject{
+	JLabel label;
+
+	public JLabel getLabel() {
+		retuen label;
+	}
+}
+==========================
+is Use Case Object a JLabel?
+
+is Compostie Object a JPanel?
+ 
+        UMLObject 
+       /         \
+composite      basic object
+			/   \
+		Use case  class

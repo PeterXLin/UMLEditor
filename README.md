@@ -5,8 +5,24 @@
 ## TODO List
 
 - [x] 確認 composite object 的行為模式
-- [ ] check instanceof (connectable)
-- [ ] interface: connectable, selectable
+- [ ] ~~interface: connectable, selectable~~
+- [x] 如何實作畫線功能
+- [ ] basic obj: check which port is connected
+- [ ] mouseDragged: connection line render
+- [x] design how to record connection
+- [ ] finish select mode
+- [ ] finish group
+- [ ] finish finish ungroup
+- [ ] finish rename
+
+```java
+class connection {
+        UMLObject 1;
+        port1;
+        UMLObject 2;
+        port2;
+      }
+```
 
 ## GUI
 
@@ -46,27 +62,12 @@
 
 - select mode
 
-  - 物件 onClicked: 將其他物件取消選取，並渲染出自己的 connection ports
-  - 背景被 onClicked: 將其他物件取消選取，紀錄起始點座標
-  - 背景被 onReleased: 紀錄結束點座標，並 selected all objects in the rectangle
-
+  - [x] 物件 onClicked: 將其他物件取消選取，並渲染出自己的 connection ports
+  - [x] 背景被 onClicked: 將其他物件取消選取，紀錄起始點座標
+  - [x] 背景被 onReleased: 紀錄結束點座標，並 selected all objects in the rectangle
   - mouse pressed and released: 紀錄起始點和結束點座標，移動物件並重新連線
 
   - 目前想法: 用 getComponentAt()確認點擊到的物件，再做出相對應的動作
-
-- association line mode
-
-  - startObject: object
-  - endObject: object
-  - mouse pressed: 紀錄起始點座標，確認是否有選到物件，若有，則將該物件設為起始物件，若無，將起始物件設為 null
-
-  - mouse released: 紀錄結束點座標，確認是否有選到物件，若有，則將該物件設為結束物件並連線，若沒有，則甚麼事情都不做
-
-- generalization line mode
-
-- composition line mode
-
-  - [ ] 測試重疊物件被點擊的情況 -> 好像用一般的 panel 就好，
 
 ```java
 lblNewLabel_1.addMouseListener(new MouseAdapter() {
@@ -78,6 +79,15 @@ lblNewLabel_1.addMouseListener(new MouseAdapter() {
 });
 ```
 
+- association, generalization, composition line mode
+
+  - startObject: object
+  - endObject: object
+  - [x] mouse pressed: 紀錄起始點座標，確認是否有選到物件，若有，則將該物件設為起始物件，若無，將起始物件設為 null
+
+  - [x] mouse released: 紀錄結束點座標，確認是否有選到物件，若有，則將該物件設為結束物件並連線，若沒有，則甚麼事情都不做
+  - [x] 測試重疊物件被點擊的情況 -> 好像用一般的 panel 就好，
+
 - class mode
   - [x] canvas area onclick: 以 click 位置的(x, y)座標為左上角，產生一個 class object
 - use case mode
@@ -88,7 +98,7 @@ lblNewLabel_1.addMouseListener(new MouseAdapter() {
 - object (最頂層的 object class)
 
   - depth: int -> 好像不用，設個 Position 就好
-  - [ ] 確認用甚麼樣的 layout 比較好實作多層的功能 -> 目前想法是用 JPanel 來實作
+  - [x] 確認用甚麼樣的 layout 比較好實作多層的功能 -> 目前想法是用 JPanel 來實作
 
 - basic object
 
@@ -104,9 +114,9 @@ lblNewLabel_1.addMouseListener(new MouseAdapter() {
 
   - [x] 思考需不需要有這個 object，或是直接記 connection 關係就好 -> 直接記 connection 關係就好，畫線用 Graphics2D 畫
 
-- composite object (can be selected, moved, ungrouped)
+- composite object (can be single selected, moved, ungrouped)
   善用 components.getParent()來取得 parent，and find some
-  - [ ] 設計 composite object 移動時要如何一起動，可能用 box 之類的來包起來
+  - [ ] 設計 composite object 移動時要如何一起動，可能用 JPanel 之類的來包起來
 
 #### 繼承架構圖
 

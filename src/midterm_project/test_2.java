@@ -1,3 +1,5 @@
+package midterm_project;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -8,6 +10,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +21,13 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class Test {
+public class test_2 {
 
     public static void main(String[] args) {
-        new Test();
+        new test_2();
     }
 
-    public Test() {
+    public test_2() {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -125,6 +128,7 @@ public class Test {
             connections.add(new Component[]{parent, child});
         }
 
+        
         void drawArrow(Graphics g1, double x1, double y1, double x2, double y2) {
         	int ARR_SIZE = 10;
         	
@@ -170,6 +174,8 @@ public class Test {
             }
             g2d.dispose();
         }
+        
+        
 
     }
 
