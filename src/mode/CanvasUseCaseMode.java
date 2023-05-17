@@ -14,6 +14,7 @@ public class CanvasUseCaseMode implements CanvasMode{
 
 	@Override
 	public void mouseClicked(MyCanvas canvas, MouseEvent e) {
+//		System.out.println("clicked on: " + e.getPoint().toString());
 		UseCaseObject tmp = new UseCaseObject(e.getPoint());
 		canvas.add(tmp.getObject(), 0);
 		canvas.objectList.add(tmp);

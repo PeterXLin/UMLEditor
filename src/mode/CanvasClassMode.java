@@ -12,6 +12,7 @@ public class CanvasClassMode implements CanvasMode{
 
 	@Override
 	public void mouseClicked(MyCanvas canvas,MouseEvent e) {
+//		System.out.println("clicked on: " + e.getPoint().toString());
 		ClassObject tmp = new ClassObject(e.getPoint());
 		canvas.add(tmp.getObject(), 0);
 		canvas.objectList.add(tmp);

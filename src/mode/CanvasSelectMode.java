@@ -11,6 +11,8 @@ import midterm_project.components.MyCanvas;
 
 public class CanvasSelectMode implements CanvasMode{
 	Point startPoint;
+	Component dragComponent;
+	Point dragOffset;
 	
 	public CanvasSelectMode() {
 	}
@@ -21,10 +23,12 @@ public class CanvasSelectMode implements CanvasMode{
 		canvas.deSelectAllObject();
 		if (clickedObj == null || clickedObj == canvas) {
 			// startPoint = e.getPoint();
+			// System.out.println(clickedObj.getClass());
 		} else {
 			for (UMLObject temp: canvas.objectList) {
 				if (clickedObj == temp.getObject()) {
 					temp.setSelected(true);
+					System.out.println(temp.getObject().getClass());
 					// System.out.println("change select state");
 				}
 			}
@@ -37,14 +41,21 @@ public class CanvasSelectMode implements CanvasMode{
 	@Override
 	public void mousePressed(MyCanvas canvas, MouseEvent e) {
 		// start point == null -> user not click on obj  
-		startPoint = canvas.getComponentAt(e.getPoint()) == canvas ? e.getPoint(): null;
-		if (startPoint != null) canvas.deSelectAllObject();
-		canvas.revalidate();
+		if (canvas.getComponentAt(e.getPoint()) == canvas) { // for group select 
+			startPoint = e.getPoint();
+			canvas.deSelectAllObject();
+			canvas.revalidate();
+		} else { // for object move
+			dragComponent = canvas.getComponentAt(e.getPoint());
+			dragOffset = new Point(e.getX() - dragComponent.getX(),
+					e.getY() - dragComponent.getY());
+		}
 	}
 
 	@Override
 	public void mouseReleased(MyCanvas canvas, MouseEvent e) {
-		// TODO Auto-generated method stub
+		dragComponent = null;
+		dragOffset = null;
 		if (startPoint == null) return;
 		
 		Boolean someObjSelected = false;
@@ -52,8 +63,8 @@ public class CanvasSelectMode implements CanvasMode{
 		Point leftUp = startPoint.getX() < endPoint.getX() ? startPoint: endPoint;
 		Point rightDown = startPoint.getX() > endPoint.getX() ? startPoint: endPoint;
 		for (UMLObject temp: canvas.objectList) {
-			// for basic object 
-			if (temp.getConnectable()) {
+//			// only basic object can be group select
+//			if (temp.getConnectable()) {
 				Rectangle tempP = temp.getBounds();
 				// if in region
 				if ((leftUp.getX() <= tempP.x && leftUp.getY() <= tempP.y) &&
@@ -61,17 +72,24 @@ public class CanvasSelectMode implements CanvasMode{
 					temp.setSelected(true);
 					someObjSelected = true;
 				}
-			}
+//			}
 		}
 		
 		if (!someObjSelected) canvas.deSelectAllObject();
 		canvas.revalidate();
+		
+		startPoint = null;
 	}
 
 	@Override
 	public void mouseDragged(MyCanvas canvas, MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		if (dragComponent != null && dragOffset != null) {
+			int deltaX = (int) (e.getX() - dragOffset.getX());
+			int deltaY = (int) (e.getY() - dragOffset.getY());
+			dragComponent.setLocation(deltaX, deltaY);
+			System.out.println("mouse dragged repaint");
+			canvas.repaint();
+		}
 	}
 
 }

@@ -41,7 +41,7 @@ public class ToggleButton extends GUIComponent{
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentMode = myMode;
-				System.out.println(currentMode.toString());
+				// System.out.println(currentMode.toString());
 			}
 		});
 	

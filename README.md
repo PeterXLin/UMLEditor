@@ -5,24 +5,23 @@
 ## TODO List
 
 - [x] 確認 composite object 的行為模式
+- [ ] 連線沒斷乾淨
 - [ ] ~~interface: connectable, selectable~~
 - [x] 如何實作畫線功能
-- [ ] basic obj: check which port is connected
-- [ ] mouseDragged: connection line render
+- [x] basic obj: check which port is connected
+- [x] mouseDragged: connection line render
 - [x] design how to record connection
-- [ ] finish select mode
-- [ ] finish group
-- [ ] finish finish ungroup
-- [ ] finish rename
-
-```java
-class connection {
-        UMLObject 1;
-        port1;
-        UMLObject 2;
-        port2;
-      }
-```
+- [x] finish select mode
+- [x] finish group
+- [x] break connection
+- [x] finish ungroup
+- [x] finish rename
+- [x] 讓各個 area 繼承 GUIComponent，把 Object list 提到父類別 -> 還要用到 Canvas，再想想
+- [x] MyCanvas.add(UMLObject)
+- [ ] 若需要保留線，在 render 時一路 getParent 到 myCanvas，以此修正座標，再畫線
+- 畫線沒辦法畫在子物件的子物件之上，要想辦法解決
+  - solution 1: 讓子物件自己畫線
+  - solution 2: 讓 group 後的 composite object 不再是一個 JPanel 裡面包著其他 component，而是紀錄一個範圍和所有包含的物件，並在移動時一起移動
 
 ## GUI
 
@@ -65,8 +64,7 @@ class connection {
   - [x] 物件 onClicked: 將其他物件取消選取，並渲染出自己的 connection ports
   - [x] 背景被 onClicked: 將其他物件取消選取，紀錄起始點座標
   - [x] 背景被 onReleased: 紀錄結束點座標，並 selected all objects in the rectangle
-  - mouse pressed and released: 紀錄起始點和結束點座標，移動物件並重新連線
-
+  - [x] mouse pressed and released: 紀錄起始點和結束點座標，移動物件並重新連線
   - 目前想法: 用 getComponentAt()確認點擊到的物件，再做出相對應的動作
 
 ```java

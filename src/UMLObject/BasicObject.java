@@ -13,7 +13,7 @@ public class BasicObject extends UMLObject{
 	protected JLabel label;
 	
 	BasicObject(){
-		label = new JLabel("default");
+		label = new JLabel("");
 		label.setFont(new Font("微軟正黑體", Font.BOLD, 16));
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -22,26 +22,55 @@ public class BasicObject extends UMLObject{
 	};
 	
 	
-	public Point getPortPoint(Port p) {
-		int offsetX = 10, offsetY = 10;
+	boolean onLineLeft(Point a, Point b, Point c) {
+		// 與正常的結果相反，因為java swing 用的y軸是相反的
+		return (a.getX() - c.getX())*(b.getY() - c.getY()) 
+				- (a.getY() - c.getY())*(b.getX() - c.getX()) >= 0 ? false : true;
+	}
+	
+	public Port getPort(Point p) {
+		int x = label.getX(), y = label.getY(), width = label.getWidth(), height = label.getHeight();
+		boolean northEast = onLineLeft(label.getLocation(), 
+				new Point(x + width, y + height), p);
+		
+		boolean northWest = onLineLeft(new Point(x, y + height), new Point(x + width, y), p);
+//		System.out.println("northEast: " + northEast);
+//		System.out.println("northWest: " + northWest);
+		if (northEast && northWest) {
+			return Port.North;
+		} else if (northEast && !northWest) {
+			return Port.East;
+		} else if (!northEast && northWest) {
+			return Port.West;
+		} else {
+			return Port.South;
+		}
+	}
+	
+	
+	public Point getPortPoint(Port p, int offsetX, int offsetY) {
+		int imgOffsetX = 10, imgOffsetY = 10;
+		int pX = label.getX() + offsetX;
+		int pY = label.getY() + offsetY;
+		// System.out.println("label offset: " + pX + " " + pY);
 		
 		Point portPoint = null;
 		switch (p) {
 			case North:
-				portPoint = new Point(label.getX() + label.getWidth() / 2,
-						label.getY() + offsetY);
+				portPoint = new Point(pX + label.getWidth() / 2,
+						pY + imgOffsetY);
 				break;
 			case East:
-				portPoint = new Point(label.getX() + label.getWidth() + offsetX,
-						label.getY() + label.getHeight() / 2);
+				portPoint = new Point(pX + label.getWidth() - imgOffsetX,
+						pY + label.getHeight() / 2);
 				break;
 			case South:
-				portPoint = new Point(label.getX() + label.getWidth() / 2,
-						label.getY() + label.getHeight() - offsetY);
+				portPoint = new Point(pX + label.getWidth() / 2,
+						pY + label.getHeight() - imgOffsetY);
 				break;
 			case West:
-				portPoint = new Point(label.getX() - offsetX,
-						label.getY() + label.getHeight() / 2);
+				portPoint = new Point(pX + imgOffsetX,
+						pY + label.getHeight() / 2);
 				break;
 			default:
 				break;

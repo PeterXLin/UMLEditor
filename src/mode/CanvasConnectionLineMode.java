@@ -4,6 +4,8 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
+import UMLObject.BasicObject;
+import UMLObject.ConnectionLine;
 import UMLObject.ConnectionType;
 import UMLObject.Port;
 import UMLObject.UMLObject;
@@ -13,7 +15,8 @@ public class CanvasConnectionLineMode implements CanvasMode{
 	UMLObject startObject, endObject;
 	Port startPort, endPort;
 	Point startPoint = null;
-	ConnectionType type = null;
+	Boolean mouseDragged = false;
+	private ConnectionType type = null;
 	
 	public CanvasConnectionLineMode() {
 		this(ConnectionType.Association);
@@ -31,6 +34,7 @@ public class CanvasConnectionLineMode implements CanvasMode{
 	@Override
 	public void mousePressed(MyCanvas canvas, MouseEvent e) {
 		Component start = canvas.getComponentAt(e.getPoint());
+		// must click on some Component except itself
 		if (start == null || start == canvas) {
 			startObject = null;
 			startPort = null;
@@ -43,18 +47,27 @@ public class CanvasConnectionLineMode implements CanvasMode{
 				}
 			}
 			
-			// TODO: get which port (based on click point)
-			startPort = Port.North;
-			startPoint = e.getPoint();
+			// must be basic object 
+			if (startObject.getConnectable()) {
+				BasicObject tempObj = (BasicObject) startObject;
+				startPort = tempObj.getPort(e.getPoint());
+				startPoint = e.getPoint();
+			} else {
+				startObject = null;
+			}
 		}
 	}
 
 	@Override
 	public void mouseReleased(MyCanvas canvas, MouseEvent e) {
+		// the first clicked object must be a basic object
 		if (startObject != null) {
+			// System.out.println(startObject);
 			Component end = canvas.getComponentAt(e.getPoint());
 			
-			if (end != null || end != canvas) {
+			// the location mouse released must be some component except canvas
+			// System.out.println(end);
+			if (end != null && end != canvas) {
 				// match UMLObject and java.awt.Component
 				for (UMLObject temp: canvas.objectList) {
 					if (temp.getObject() == end) {
@@ -62,29 +75,42 @@ public class CanvasConnectionLineMode implements CanvasMode{
 					}
 				}
 				
-				// TODO: get which port (based on click point) 
-				endPort = Port.North;
-				// avoid click
-				if (endObject != startObject) {
-					canvas.addConnection(this.type, startObject, startPort, 
-							endObject, endPort);
+				// the object that mouse released on must be a basic object
+				if (endObject.getConnectable()) {
+					// avoid click
+					if (endObject != startObject) {
+						BasicObject tempObj = (BasicObject) endObject;
+						endPort = tempObj.getPort(e.getPoint());
+						canvas.addConnection(this.type, startObject, startPort, 
+								endObject, endPort);
+					}
 				}
-
 
 			}
 			
-			startObject = null;
-			startPort = null;
-			endObject = null;
-			endPort = null;
+//			startObject = null;
+//			startPort = null;
+//			startPoint = null;
+//			endObject = null;
+//			endPort = null;
 		}
+		startObject = null;
+		startPort = null;
+		startPoint = null;
+		endObject = null;
+		endPort = null;
 		canvas.repaint();
 	}
 
+	
 	@Override
 	public void mouseDragged(MyCanvas canvas, MouseEvent e) {
-		if (startPoint != null) {
-			int mouseX = e.getX(), mouseY = e.getY();
+		if (startPoint != null && startObject != null) {
+			mouseDragged = true;
+			canvas.setTempConnectionLine(
+					new ConnectionLine(this.type, (BasicObject) startObject, startPort, null, null), 
+					e.getPoint());
+			canvas.repaint();
 		}
 	}
 }

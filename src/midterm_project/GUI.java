@@ -70,43 +70,23 @@ public class GUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 700);
 		
+		// button area
 		JPanel buttonArea = new JPanel();
 		buttonArea.setMinimumSize(new Dimension(100, 10));
-		// JLayeredPane canvasArea = new JLayeredPane();
+		buttonArea.setLayout(new BoxLayout(buttonArea, BoxLayout.Y_AXIS));	
+		
+		// canvas area
 		MyCanvasArea canvasArea = new MyCanvasArea();
 		
+		// content pane
 		contentPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, buttonArea, canvasArea.getMyCanvas());
 		contentPane.setEnabled(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		// menu area
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		
-		JMenu mnNewMenu = new JMenu("File");
-		mnNewMenu.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
-		menuBar.add(mnNewMenu);
-		
-		JMenu mnNewMenu_1 = new JMenu("Edit");
-		mnNewMenu_1.setHorizontalAlignment(SwingConstants.LEFT);
-		mnNewMenu_1.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
-		menuBar.add(mnNewMenu_1);
-		
-		JMenuItem GroupButton = new JMenuItem("Group");
-		GroupButton.setHorizontalAlignment(SwingConstants.LEFT);
-		mnNewMenu_1.add(GroupButton);
-		
-		JMenuItem UngroupButton = new JMenuItem("Ungroup");
-		UngroupButton.setHorizontalAlignment(SwingConstants.LEFT);
-		mnNewMenu_1.add(UngroupButton);
-		
-		JMenuItem mntmChangeObjectName = new JMenuItem("Change Object Name");
-		mntmChangeObjectName.setHorizontalAlignment(SwingConstants.LEFT);
-		mnNewMenu_1.add(mntmChangeObjectName);
-		
-		buttonArea.setLayout(new BoxLayout(buttonArea, BoxLayout.Y_AXIS));	
-		
+		ToolBarArea toolBarArea = new ToolBarArea(canvasArea.getMyCanvas());
+		setJMenuBar(toolBarArea.getMenu());
 		
 		// button area
 		ButtonGroup btnGroup = new ButtonGroup();
